@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        .popup-content h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .popup-content p {
+            margin: 10px 0;
+            color: #555;
+            text-align: left;
+        }
+        .popup-content strong {
+            color: #000;
+        }
+        .countdown {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #e44d26;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-overlay" id="infoPopup">
+        <div class="popup-content">
+            <h2>User Information</h2>
+            <p><strong>IP Address:</strong> <span id="ipAddress">Loading...</span></p>
+            <p><strong>Location:</strong> <span id="location">Loading...</span></p>
+            <p><strong>Device Type:</strong> <span id="deviceType">Loading...</span></p>
+            <p><strong>Operating System:</strong> <span id="operatingSystem">Loading...</span></p>
+            <p><strong>Browser:</strong> <span id="browser">Loading...</span></p>
+            <p><strong>Time Clicked:</strong> <span id="timeClicked">Loading...</span></p>
+            <div class="countdown">Redirecting in <span id="countdownTimer">5</span> seconds...</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const ipAddressSpan = document.getElementById('ipAddress');
+            const locationSpan = document.getElementById('location');
+            const deviceTypeSpan = document.getElementById('deviceType');
+            const operatingSystemSpan = document.getElementById('operatingSystem');
+            const browserSpan = document.getElementById('browser');
+            const timeClickedSpan = document.getElementById('timeClicked');
+            const countdownTimerSpan = document.getElementById('countdownTimer');
+            const infoPopup = document.getElementById('infoPopup');
+
+            // 1. Get Time Clicked
+            timeClickedSpan.textContent = new Date().toLocaleString();
+
+            // 2. Get Device Type, Operating System, and Browser
+            const userAgent = navigator.userAgent;
+            let deviceType = 'Unknown';
+            let operatingSystem = 'Unknown';
+            let browser = 'Unknown';
+
+            // Detect Device Type
+            if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(userAgent)) {
+                deviceType = 'Tablet';
+            } else if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(userAgent)) {
+                deviceType = 'Mobile';
+            } else {
+                deviceType = 'Desktop';
+            }
+
+            // Detect Operating System
+            if (userAgent.indexOf("Win") > -1) {
+                operatingSystem = "Windows";
+            } else if (userAgent.indexOf("Mac") > -1) {
+                operatingSystem = "macOS";
+            } else if (userAgent.indexOf("Linux") > -1) {
+                operatingSystem = "Linux";
+            } else if (userAgent.indexOf("Android") > -1) {
+                operatingSystem = "Android";
+            } else if (userAgent.indexOf("like Mac") > -1) { // iOS devices often contain "like Mac"
+                operatingSystem = "iOS";
+            } else if (userAgent.indexOf("CrOS") > -1) {
+                operatingSystem = "Chrome OS";
+            }
+
+            // Detect Browser
+            if (userAgent.indexOf("Firefox") > -1) {
+                browser = "Firefox";
+            } else if (userAgent.indexOf("SamsungBrowser") > -1) {
+                browser = "Samsung Internet";
+            } else if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
+                browser = "Opera";
+            } else if (userAgent.indexOf("Trident") > -1) {
+                browser = "Internet Explorer";
+            } else if (userAgent.indexOf("Edge") > -1) {
+                browser = "Edge";
+            } else if (userAgent.indexOf("Chrome") > -1) {
+                browser = "Chrome";
+            } else if (userAgent.indexOf("Safari") > -1) {
+                browser = "Safari";
+            }
+            
+            deviceTypeSpan.textContent = deviceType;
+            operatingSystemSpan.textContent = operatingSystem;
+            browserSpan.textContent = browser;
+
+            // 3. Get IP Address and Location using ip-api.com
+            try {
+                const response = await fetch('http://ip-api.com/json/');
+                const data = await response.json();
+                if (data.status === 'success') {
+                    ipAddressSpan.textContent = data.query;
+                    locationSpan.textContent = `${data.city}, ${data.regionName}, ${data.country}`;
+                } else {
+                    ipAddressSpan.textContent = 'N/A';
+                    locationSpan.textContent = 'N/A';
+                    console.error('Failed to fetch IP and location:', data.message);
+                }
+            } catch (error) {
+                ipAddressSpan.textContent = 'Error';
+                locationSpan.textContent = 'Error';
+                console.error('Error fetching IP and location:', error);
+            }
+
+            // 4. Countdown and Redirect
+            let countdown = 5;
+            const interval = setInterval(() => {
+                countdown--;
+                countdownTimerSpan.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    // Redirect to index.html with OS information
+                    window.location.href = 'index.html?os=' + encodeURIComponent(operatingSystem);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
