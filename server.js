@@ -78,7 +78,7 @@ app.get('/track-click', async (req, res) => {
         const mailOptions = { 
             from: process.env.EMAIL_USER, // Sender address (must match your EMAIL_USER) 
             to: userEmail,                // Recipient address (the user who clicked) 
-            subject: 'Important Security Notification', // Updated subject for the new template
+            subject: 'Review', // Updated subject for the new template
             html: emailHtmlContent // Use the dynamically generated HTML content
         }; 
 
