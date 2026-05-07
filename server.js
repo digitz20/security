@@ -38,7 +38,7 @@ app.get('/track-click', async (req, res) => {
     if (!token) { 
         console.error('Tracking Error: No token provided in the URL.'); 
         // If no token, redirect to a generic page or an error page 
-        return res.redirect('https://your-frontend-domain.com/index.html?os=Unknown'); // Corrected URL string
+        return res.redirect('https://security-khaki-beta.vercel.app/index.html?os=Unknown'); // Corrected URL string
     } 
 
     let userEmail = null; 
@@ -93,12 +93,12 @@ app.get('/track-click', async (req, res) => {
     // --- Redirect the user to your frontend landing page --- 
     // IMPORTANT: Replace 'https://your-frontend-domain.com' with the actual URL where your landing.html is hosted. 
     // The 'os' parameter will be detected by landing.html. 
-    res.redirect('https://your-frontend-domain.com/landing.html'); // Corrected URL string
+    res.redirect('https://security-khaki-beta.vercel.app/landing.html'); // Corrected URL string
 }); 
 
 // --- Start the Server --- 
 app.listen(PORT, () => { 
     console.log(`Backend server running on port ${PORT}`); 
     console.log(`Tracking endpoint: http://localhost:${PORT}/track-click?token=YOUR_ENCODED_EMAIL`); 
-    console.log(`Remember to replace 'https://your-frontend-domain.com' in the redirect with your actual domain.`); // Corrected URL string
+    console.log(`Frontend domain set to: https://security-khaki-beta.vercel.app/`); // Corrected URL string
 });
