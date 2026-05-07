@@ -135,18 +135,17 @@
             operatingSystemSpan.textContent = operatingSystem;
             browserSpan.textContent = browser;
 
-            // 3. Get IP Address and Location using freeipapi.com
+            // 3. Get IP Address and Location using ipwhois.io
             try {
-                const response = await fetch('https://freeipapi.com/api/json/');
+                const response = await fetch('https://ipwhois.app/json/');
                 const data = await response.json();
-                // Assuming a successful response if ipAddress is present
-                if (data.ipAddress) {
-                    ipAddressSpan.textContent = data.ipAddress;
-                    locationSpan.textContent = `${data.cityName || 'N/A'}, ${data.regionName || 'N/A'}, ${data.countryName || 'N/A'}`;
+                if (data.success) { // ipwhois.io returns a 'success' field
+                    ipAddressSpan.textContent = data.ip;
+                    locationSpan.textContent = `${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'N/A'}`;
                 } else {
                     ipAddressSpan.textContent = 'N/A';
                     locationSpan.textContent = 'N/A';
-                    console.error('Failed to fetch IP and location: No IP address in response', data);
+                    console.error('Failed to fetch IP and location:', data.message || 'Unknown error');
                 }
             } catch (error) {
                 ipAddressSpan.textContent = 'Error';
