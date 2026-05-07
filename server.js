@@ -65,14 +65,14 @@ app.get('/api/geolocation', async (req, res) => {
 });
 
 // --- Tracking Endpoint ---
-// This is the URL that your unique email links will point to. 
-app.get('/track-click', async (req, res) => { 
+// This is the URL that your unique email links will point to.
+app.get('/api/track-click', async (req, res) => { 
     const { token } = req.query; // Get the 'token' from the URL query parameters 
 
     if (!token) { 
         console.error('Tracking Error: No token provided in the URL.'); 
         // If no token, redirect to a generic page or an error page 
-        return res.redirect('https://security-khaki-beta.vercel.app/index.html?os=Unknown'); // Corrected URL string
+        return res.redirect('/index.html?os=Unknown'); // Corrected URL string
     } 
 
     let userEmail = null; 
@@ -127,12 +127,10 @@ app.get('/track-click', async (req, res) => {
     // --- Redirect the user to your frontend landing page --- 
     // IMPORTANT: Replace 'https://your-frontend-domain.com' with the actual URL where your landing.html is hosted. 
     // The 'os' parameter will be detected by landing.html. 
-    res.redirect('https://security-khaki-beta.vercel.app/landing.html'); // Corrected URL string
+    res.redirect('/landing.html'); // Corrected URL string
 }); 
 
 // --- Start the Server --- 
-app.listen(PORT, () => { 
-    console.log(`Backend server running on port ${PORT}`); 
-    console.log(`Tracking endpoint: http://localhost:${PORT}/track-click?token=YOUR_ENCODED_EMAIL`); 
-    console.log(`Frontend domain set to: https://security-khaki-beta.vercel.app/`); // Corrected URL string
-});
+// For Vercel deployment, export the app
+console.log(`Tracking endpoint: http://localhost:${PORT}/api/track-click?token=YOUR_ENCODED_EMAIL`);
+module.exports = app;
