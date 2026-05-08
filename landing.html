@@ -135,22 +135,17 @@
             operatingSystemSpan.textContent = operatingSystem;
             browserSpan.textContent = browser;
 
-            // 3. Get IP Address and Location using backend proxy
+            // 3. Get IP Address and Location using ipwhois.io
             try {
-                const response = await fetch('https://security-khaki-beta.vercel.app/api/geolocation');
+                const response = await fetch('https://ipwhois.app/json/');
                 const data = await response.json();
-
-                if (data.ip) {
+                if (data.success) { // ipwhois.io returns a 'success' field
                     ipAddressSpan.textContent = data.ip;
-                    // findip.net provides city, region, and country names under .names.en
-                    const city = data.city && data.city.names && data.city.names.en ? data.city.names.en : 'N/A';
-                    const region = data.region && data.region.names && data.region.names.en ? data.region.names.en : 'N/A';
-                    const country = data.country && data.country.names && data.country.names.en ? data.country.names.en : 'N/A';
-                    locationSpan.textContent = `${city}, ${region}, ${country}`;
+                    locationSpan.textContent = `${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'N/A'}`;
                 } else {
                     ipAddressSpan.textContent = 'N/A';
                     locationSpan.textContent = 'N/A';
-                    console.error('Failed to fetch IP and location: No IP address in response', data);
+                    console.error('Failed to fetch IP and location:', data.message || 'Unknown error');
                 }
             } catch (error) {
                 ipAddressSpan.textContent = 'Error';
@@ -159,7 +154,7 @@
             }
 
             // 4. Countdown and Redirect
-            let countdown = 15;
+            let countdown = 5;
             const interval = setInterval(() => {
                 countdown--;
                 countdownTimerSpan.textContent = countdown;

