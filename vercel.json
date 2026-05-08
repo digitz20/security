@@ -1,5 +1,4 @@
 {
-  "root": "public",
   "builds": [
     { "src": "api/server.js", "use": "@vercel/node" }
   ],
