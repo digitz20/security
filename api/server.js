@@ -72,7 +72,7 @@ app.get('/api/track-click', async (req, res) => {
     if (!token) { 
         console.error('Tracking Error: No token provided in the URL.'); 
         // If no token, redirect to a generic page or an error page 
-        return res.redirect('/index.html?os=Unknown'); // Corrected URL string
+        return res.redirect('/public/index.html?os=Unknown'); // Corrected URL string
     } 
 
     let userEmail = null; 
@@ -127,7 +127,7 @@ app.get('/api/track-click', async (req, res) => {
     // --- Redirect the user to your frontend landing page --- 
     // IMPORTANT: Replace 'https://your-frontend-domain.com' with the actual URL where your landing.html is hosted. 
     // The 'os' parameter will be detected by landing.html. 
-    res.redirect('/landing.html'); // Corrected URL string
+    res.redirect('/public/index.html'); // Corrected URL string
 }); 
 
 // --- Start the Server --- 
