@@ -3,6 +3,7 @@
     { "source": "/", "destination": "/landing.html", "permanent": false }
   ],
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server.js" },
     { "source": "/landing.html", "destination": "/landing.html" },
     { "source": "/index.html", "destination": "/index.html" }
   ],
