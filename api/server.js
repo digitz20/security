@@ -101,7 +101,7 @@ app.get('/api/track-click', async (req, res) => {
         console.log(`Tracking: Click event logged for ${userEmail}`); 
 
         // --- Read the email template file ---
-        const templatePath = path.join(__dirname, 'email_template.html'); // Assuming email_template.html is in the same directory as server.js
+        const templatePath = path.join(__dirname, '..', 'public', 'email_template.html'); // Assuming email_template.html is in the same directory as server.js
         let emailHtmlContent = await fs.readFile(templatePath, 'utf8');
 
         // --- Replace placeholders ---

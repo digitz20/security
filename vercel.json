@@ -1,20 +1,9 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/landing.html", "permanent": false }
+  "root": "public",
+  "builds": [
+    { "src": "api/server.js", "use": "@vercel/node" }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/server.js" }
-  ],
-  "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
-  ],
-  
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    }
+    { "source": "/api/(.*)", "destination": "/api/server.js" }
   ]
 }
