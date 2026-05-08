@@ -30,6 +30,9 @@ const transporter = nodemailer.createTransport({
 app.use(express.json()); // For parsing application/json requests 
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded requests 
 
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname, ''))); 
+
 // --- Tracking Endpoint --- 
 // This is the URL that your unique email links will point to. 
 app.get('/track-click', async (req, res) => { 
